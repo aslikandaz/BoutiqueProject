@@ -11,6 +11,7 @@ namespace Core.Utilities.Results
     {
         bool Success { get; } // buradaki get bir şeyi return et demek
         string Message { get; }
+        bool IsSuccess { get; }
         // bu propertylerin set edilme işlemi constructor içinde yapılacak
     }
 }

@@ -50,6 +50,14 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+        public TEntity GetById(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().FirstOrDefault(filter);
+            }
+        }
+
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())

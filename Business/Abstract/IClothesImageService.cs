@@ -9,7 +9,7 @@ namespace Business.Abstract
 {
     public interface IClothesImageService
     {
-        IResult Add(IFormFile file,ClothesImage clothesImage);
+        IResult Add(ClothesImage clothesImage, IFormFile file);
         IResult Update(IFormFile file,ClothesImage clothesImage );
         IResult Delete(ClothesImage clothesImage );
         IDataResult<List<ClothesImage>> GetAll();

@@ -57,6 +57,11 @@ namespace DataAccess.Concrete.InMemory
             return _clothes.Where(c => c.ClothesId == clothesId).ToList();
         }
 
+        public Clothes GetById(Expression<Func<Clothes, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ClothesDetailDto> GetClothesDetails()
         {
             throw new NotImplementedException();

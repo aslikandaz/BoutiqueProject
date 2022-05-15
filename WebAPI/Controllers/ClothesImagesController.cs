@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
 {
     public class ClothesImagesController:ControllerBase
     {
-        private IClothesImageService _clothesImageService;
+         IClothesImageService _clothesImageService;
 
         public ClothesImagesController(IClothesImageService clothesImageService)
         {
@@ -19,9 +19,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] ClothesImage images)
+        public IActionResult Add([FromForm(Name="image")] IFormFile file, [FromForm] ClothesImage image)
         {
-            var result = _clothesImageService.Add(file, images);
+            var result = _clothesImageService.Add( image, file);
             if (result.Success)
             {
                 return Ok(result);
@@ -30,12 +30,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete([FromForm(Name = ("Id"))] int Id)
+        public IActionResult Delete(ClothesImage clothesImage)
         {
 
-            var carImage = _clothesImageService.GetById(Id).Data;
+            var carDeleteImage = _clothesImageService.GetById(clothesImage.ImageId).Data;
 
-            var result = _clothesImageService.Delete(carImage);
+            var result = _clothesImageService.Delete(carDeleteImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -44,10 +44,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm(Name = ("Id"))] int Id)
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] ClothesImage clothesImage)
         {
-            var carImage = _clothesImageService.GetById(Id).Data;
-            var result = _clothesImageService.Update(file, carImage);
+            var result = _clothesImageService.Update(file, clothesImage);
+            
             if (result.Success)
             {
                 return Ok(result);
@@ -67,9 +67,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int imageId)
         {
-            var result = _clothesImageService.GetById(id);
+            var result = _clothesImageService.GetById(imageId);
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -77,6 +77,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbyclothesid")]
+        public IActionResult GetByImageId(int clothesId)
+        {
+            var result = _clothesImageService.GetImagesByClothesId(clothesId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
     }
 }

@@ -15,7 +15,7 @@ namespace Core.DataAccess
     // new(): newlenebilir olmalı (yani IEntity olamaz artık)
     public interface IEntityRepository<T> where T:class,IEntity,new()
     {
-
+        T GetById(Expression<Func<T, bool>> filter);
         List<T> GetAll(Expression<Func<T,bool>> filter=null); // parantez içi filre verirse ona göre elemanları getir vermezse hepsini getir demek
         T Get(Expression<Func<T, bool>>filter);// burada da filtre zorunlu kılındı
         void Add(T entity);

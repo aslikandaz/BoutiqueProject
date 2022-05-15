@@ -16,5 +16,9 @@ namespace Business.Constants
         public static string ClothesNameInvalid = "Ürün ismi geçersiz";
         public static string ClothesListed = "Ürünler Listelendi";
         public static string MaintenanceTime = "Sistem bakımda";
+        public static string ClothesImageLimit = "ürün resim sayısı aşıldı";
+        public static string NoImages = "ürüne ait resim bulunamadı";
+        public static string ImagesUpdated = "ürüne ait resim güncellendi";
     }
 }
+

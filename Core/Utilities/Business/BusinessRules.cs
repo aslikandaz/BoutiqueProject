@@ -1,9 +1,9 @@
-﻿using Core.Utilities.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Utilities.Results;
 
-namespace Core.Utilities
+namespace Core.Utilities.Business
 {
     public class BusinessRules
     {
@@ -15,8 +15,8 @@ namespace Core.Utilities
                 {
                     return logic;
                 }
-
             }
+
             return null;
         }
     }
