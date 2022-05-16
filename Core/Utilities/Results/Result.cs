@@ -27,6 +27,6 @@ namespace Core.Utilities.Results
 
         public string Message { get; }
 
-        public bool IsSuccess => throw new NotImplementedException();
+        
     }
 }

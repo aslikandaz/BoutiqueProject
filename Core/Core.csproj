@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utilities\Security\Hashing\" />
+    <Folder Include="Utilities\Helpers\" />
   </ItemGroup>
 
 </Project>
