@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -28,12 +29,22 @@ namespace Business.Concrete
             _clothesDal = clothesDal;
         }
 
+       // [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ClothesValidator))]
+        //[CacheRemoveAspect("IClothesService.Get")]
         public IResult Add(Clothes clothes)
         {
 
             _clothesDal.Add(clothes);
             return new SuccessResult(Messages.ClothesAdded);
+        }
+
+        //[TransactionScopeAspect]
+        public IResult AddTransactionalTest(Clothes clothes)
+        {
+            _clothesDal.Update(clothes);
+            _clothesDal.Add(clothes);
+            return new SuccessResult(Messages.ClothesUpdated);
         }
 
         public IResult Delete(Clothes clothes)
@@ -42,6 +53,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ClothesDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Clothes>> GetAll()
         {
             //iş kodları
@@ -65,6 +77,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Clothes>>(_clothesDal.GetAll(c => c.ColorId == id));
         }
 
+        //[CacheAspect]
+       // [PerformanceAspect(10)]
         public IDataResult<Clothes> GetById(int clothesId)
         {
             return new SuccessDataResult<Clothes>(_clothesDal.Get(p=>p.ClothesId== clothesId));
@@ -75,6 +89,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ClothesDetailDto>>(_clothesDal.GetClothesDetails());
         }
 
+       // [ValidationAspect(typeof(ClothesValidator))]
+       // [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Clothes clothes)
         {
             _clothesDal.Update(clothes);

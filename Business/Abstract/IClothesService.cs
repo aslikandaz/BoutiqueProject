@@ -20,5 +20,6 @@ namespace Business.Abstract
         IResult Delete(Clothes clothes);
         IDataResult<List<ClothesDetailDto>> GetClothesDetails();
         IDataResult<Clothes> GetById(int clothesId);
+        IResult AddTransactionalTest(Clothes clothes);
     }
 }
